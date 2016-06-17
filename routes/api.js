@@ -1,9 +1,6 @@
-var express = require('express');
-var router = express.Router();
-
-var uuid = require('node-uuid');
-var redis = require('redis'),
-    client = redis.createClient();
+var router = require('express').Router(),
+    client = require('redis').createClient(),
+    uuid = require('node-uuid');
 
 
 var Task = function(totalSteps, extra) {
@@ -23,11 +20,17 @@ var Task = function(totalSteps, extra) {
 //            dateCreated: utc, dateUpdated: utc}
 
 
+// Get all tasks
+router.get('/tasks', function(req, res) {
+    res.json('lala');
+});
+
 // Initialize a new task in redis
 router.post('/tasks', function(req, res) {
-    var json = req.body;
-    var task = new Task(json.totalSteps, json.extra);
-    var taskId = uuid.v1();
+    var json = req.body,
+        task = new Task(json.totalSteps, json.extra),
+        taskGroup = json.taskGroup,
+        taskId = uuid.v1()
 
     client.hmset(taskId, task, function(err, reply) {
         res.json({taskId: taskId});
