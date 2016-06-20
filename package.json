@@ -12,5 +12,10 @@
     "morgan": "~1.6.1",
     "node-uuid": "~1.4.7",
     "redis": "~2.6.0-2"
+  },
+  "devDependencies": {
+    "mocha": "^2.5.3",
+    "should": "^9.0.2",
+    "supertest": "^1.2.0"
   }
 }
